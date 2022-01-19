@@ -5,7 +5,7 @@ export function Layout ({ children }) {
   return (
     <Container className='my-4'>
       <header>
-        <Stack direction='horizontal' gap='2' className='mb-4'>
+        <Stack direction='horizontal' gap='2'>
           <h1 className='me-auto'>El Antojaso</h1>
           <p>fav</p>
         </Stack>
