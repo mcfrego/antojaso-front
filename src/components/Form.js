@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { useCurrentLocation } from '../hooks'
-import { Section, FormLocation } from '.'
+import { Section, FormLocation, FormSearch } from '.'
 
 export function Form () {
   const [location, setLocation] = useState({ type: null, value: '' })
@@ -14,6 +14,7 @@ export function Form () {
         currentLocation={currentLocation}
         onChangeLocation={setLocation}
       />
+      <FormSearch location={location} />
     </Section>
   )
 }

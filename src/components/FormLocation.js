@@ -26,7 +26,7 @@ export function FormLocation (props) {
     location.type !== 'current' ? location.value : 'Current location'
 
   return (
-    <Form>
+    <Form className='mb-4'>
       <Form.Group className='mb-2' controlId='location'>
         <Form.Label>Location</Form.Label>
         <Form.Control
