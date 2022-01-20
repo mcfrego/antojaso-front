@@ -1,4 +1,4 @@
-import { Section, FormSearch } from '../components'
+import { Section, Form } from '../components'
 
 export function SearchView () {
   return (
@@ -9,9 +9,8 @@ export function SearchView () {
           something delicious? <strong> We got you!</strong>
         </p>
       </Section>
-      <Section>
-        <FormSearch />
-      </Section>
+      <Form />
+      <Section></Section>
     </>
   )
 }
