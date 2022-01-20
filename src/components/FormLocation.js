@@ -1,8 +1,6 @@
 import Form from 'react-bootstrap/Form'
 
-export function FormLocation (props) {
-  const { location, currentLocation, onChangeLocation } = props
-
+export function FormLocation ({ location, currentLocation, onChangeLocation }) {
   const currentPositionHandler = () => {
     onChangeLocation(prev => {
       return prev.type !== 'current'

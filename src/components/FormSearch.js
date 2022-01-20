@@ -1,18 +1,9 @@
 import Form from 'react-bootstrap/Form'
-import { Button } from 'bootstrap'
-import { searchPlaces } from '../service/apiFSQ'
 
-export function FormSearch (props) {
-  const { location } = props
-
+export function FormSearch ({ search, onChangeSearch, isInputDisabled }) {
   const selectedSearchHandler = event => {
-    searchPlaces({
-      searchTerm: event.target.value,
-      ...location
-    })
+    onChangeSearch(event.target.value)
   }
-
-  const isInputDisabled = !location.type
 
   return (
     <Form className='mb-4'>
