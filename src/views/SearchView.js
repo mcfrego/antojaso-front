@@ -10,7 +10,6 @@ export function SearchView () {
         </p>
       </Section>
       <Form />
-      <Section></Section>
     </>
   )
 }
