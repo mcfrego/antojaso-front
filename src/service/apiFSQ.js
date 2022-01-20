@@ -12,7 +12,8 @@ const api = axios.create({
 
 export async function searchPlaces (params) {
   const { searchTerm, type, value } = params
-  // if (searchTerm === '') return null
+
+  if (searchTerm === '') return null
 
   let queryParams = '?query=' + searchTerm
 
@@ -21,6 +22,6 @@ export async function searchPlaces (params) {
     queryParams += `&ll=${value.latitude},${value.longitude}`
   }
 
-  const data = await api.get('/search' + queryParams)
-  console.log(data)
+  const { data } = await api.get('/search' + queryParams)
+  return data.results
 }
