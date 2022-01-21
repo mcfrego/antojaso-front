@@ -14,7 +14,7 @@ export function ResultListItem ({ result }) {
   } = result
 
   const category = categories[0].name
-  const icon = categories[0].icon.prefix + '32' + categories[0].icon.suffix
+  const icon = categories[0].icon.prefix + 'bg_32' + categories[0].icon.suffix
   const address = location.address
   const distance = `(${(distanceNoFormat / 1000).toFixed(1)} km)`
 
@@ -23,12 +23,7 @@ export function ResultListItem ({ result }) {
   }
 
   return (
-    <Card
-      className='mb-3'
-      bg='secondary'
-      border='secondary'
-      onClick={onCardClick}
-    >
+    <Card className='mb-3' onClick={onCardClick}>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Subtitle>

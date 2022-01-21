@@ -22,6 +22,9 @@ export function FormLocation ({ location, currentLocation, onChangeLocation }) {
   const isInputDisabled = location.type === 'current'
   const inputValue =
     location.type !== 'current' ? location.value : 'Current location'
+  const checkLabel = `Get current location ${
+    !currentLocation ? '(not available)' : ''
+  }`
 
   return (
     <Form className='mb-4'>
@@ -36,7 +39,7 @@ export function FormLocation ({ location, currentLocation, onChangeLocation }) {
         />
       </Form.Group>
       <Form.Check className='checkbox'>
-        <Form.Check.Label>Get current location</Form.Check.Label>
+        <Form.Check.Label>{checkLabel}</Form.Check.Label>
         <Form.Check.Input
           disabled={!currentLocation}
           onClick={currentPositionHandler}
