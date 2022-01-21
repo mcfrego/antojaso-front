@@ -1,20 +1,17 @@
-import { useState } from 'react'
-
-import { useCurrentLocation, useSearchResults } from '../hooks'
-
+import { useState, useContext } from 'react'
+import { LocationContext } from '../context/location-context'
+import { useSearchResults } from '../hooks'
 import { Section, FormLocation, FormSearch, ResultList } from '../components'
 
 export function SearchView () {
-  const [location, setLocation] = useState({ type: null, value: '' })
   const [search, setSearch] = useState('')
-  const [currentLocation, currentLocationError] = useCurrentLocation()
-  const { data, isLoading, error } = useSearchResults({
-    searchTerm: search,
-    ...location
-  })
+  const { location, onChangeLocation, currentLocation } = useContext(
+    LocationContext
+  )
+
+  const { data, isLoading, error } = useSearchResults(search, location)
 
   const isSearchInputDisabled = !location.type
-
   return (
     <>
       <Section>
@@ -29,8 +26,8 @@ export function SearchView () {
       <Section>
         <FormLocation
           location={location}
-          currentLocation={currentLocation}
-          onChangeLocation={setLocation}
+          currentLocation={currentLocation.value}
+          onChangeLocation={onChangeLocation}
         />
         <FormSearch
           search={search}
@@ -42,7 +39,7 @@ export function SearchView () {
         results={data}
         location={location}
         isLoading={isLoading}
-        locationError={currentLocationError}
+        locationError={currentLocation.error}
         searchError={error}
       />
     </>

@@ -2,18 +2,14 @@ import Form from 'react-bootstrap/Form'
 
 export function FormLocation ({ location, currentLocation, onChangeLocation }) {
   const currentPositionHandler = () => {
-    onChangeLocation(prev => {
-      return prev.type !== 'current'
-        ? {
-            type: 'current',
-            value: currentLocation
-          }
-        : { type: null, value: '' }
+    onChangeLocation({
+      actionFromCheckbox: true
     })
   }
 
   const selectedPositionHandler = event => {
     onChangeLocation({
+      actionFromCheckbox: false,
       type: 'near',
       value: event.target.value
     })

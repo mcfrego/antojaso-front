@@ -1,14 +1,13 @@
 import { useQuery } from 'react-query'
-
-import { searchPlaces } from '../service/apiFSQ'
 import { useDebounceValue } from '.'
+import { searchPlaces } from '../service/apiFSQ'
 
-export function useSearchResults (params) {
-  const debouncedSearchTerm = useDebounceValue(params.searchTerm)
+export function useSearchResults (searchTerm, location) {
+  const debouncedSearchTerm = useDebounceValue(searchTerm)
 
   const query = useQuery(['searchResults', debouncedSearchTerm], () =>
     searchPlaces({
-      ...params,
+      ...location,
       searchTerm: debouncedSearchTerm
     })
   )
