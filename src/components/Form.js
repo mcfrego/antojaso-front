@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { useCurrentLocation, useSearchResults } from '../hooks'
-import { Section, FormLocation, FormSearch, Results } from '.'
+import { Section, FormLocation, FormSearch, ResultList } from '.'
 
 export function Form () {
   const [location, setLocation] = useState({ type: null, value: '' })
@@ -28,7 +28,7 @@ export function Form () {
           isInputDisabled={isSearchInputDisabled}
         />
       </Section>
-      <Results
+      <ResultList
         results={data}
         isLoading={isLoading}
         locationError={currentLocationError}
