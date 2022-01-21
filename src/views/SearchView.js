@@ -5,12 +5,10 @@ import { Section, FormLocation, FormSearch, ResultList } from '../components'
 
 export function SearchView () {
   const [search, setSearch] = useState('')
-  const { location, onChangeLocation, currentLocation } = useContext(
-    LocationContext
-  )
-
+  const { location, onChangeLocation } = useContext(LocationContext)
   const { data, isLoading, error } = useSearchResults(search, location)
 
+  console.log('searchview')
   const isSearchInputDisabled = !location.type
   return (
     <>
@@ -26,7 +24,7 @@ export function SearchView () {
       <Section>
         <FormLocation
           location={location}
-          currentLocation={currentLocation.value}
+          currentLocation={location.current}
           onChangeLocation={onChangeLocation}
         />
         <FormSearch
@@ -39,7 +37,7 @@ export function SearchView () {
         results={data}
         location={location}
         isLoading={isLoading}
-        locationError={currentLocation.error}
+        locationError={location.currentError}
         searchError={error}
       />
     </>

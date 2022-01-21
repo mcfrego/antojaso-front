@@ -8,22 +8,26 @@ export const LocationContext = React.createContext({
 })
 
 export function LocationProvider ({ children }) {
-  const [currentLocation, currentLocationError] = useCurrentLocation()
   const [location, setLocation] = useState({
     type: null,
-    value: ''
+    value: '',
+    current: null,
+    currentError: ''
   })
+  useCurrentLocation(setLocation)
+
   const onChangeLocation = ({ actionFromCheckbox, type, value }) => {
     setLocation(prevState => {
       if (actionFromCheckbox) {
         return prevState.type !== 'current'
           ? {
+              ...prevState,
               type: 'current',
-              value: currentLocation
+              value: location.current
             }
-          : { type: null, value: '' }
+          : { ...prevState, type: null, value: '' }
       }
-      return { type, value }
+      return { ...prevState, type, value }
     })
   }
 
@@ -31,11 +35,7 @@ export function LocationProvider ({ children }) {
     <LocationContext.Provider
       value={{
         location,
-        onChangeLocation,
-        currentLocation: {
-          value: currentLocation,
-          error: currentLocationError
-        }
+        onChangeLocation
       }}
     >
       {children}

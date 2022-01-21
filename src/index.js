@@ -12,13 +12,13 @@ const queryClient = new QueryClient()
 
 ReactDOM.render(
   <React.StrictMode>
-    <LocationProvider>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <LocationProvider>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </QueryClientProvider>
-    </LocationProvider>
+      </LocationProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
