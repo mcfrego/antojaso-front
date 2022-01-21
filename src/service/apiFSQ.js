@@ -15,14 +15,16 @@ export async function searchPlaces (params) {
 
   if (searchTerm === '') return null
 
-  let queryParams = '?query=' + searchTerm
+  let queryParams = '&query=' + searchTerm
 
   if (type === 'near') queryParams += `&near=${value.replace(' ', '%20')}`
   if (type === 'current') {
     queryParams += `&ll=${value.latitude},${value.longitude}`
   }
 
-  const { data } = await api.get('/search' + queryParams)
+  const { data } = await api.get(
+    '/search?fields=rating,categories,name,distance,location' + queryParams
+  )
   return data.results
 }
 
