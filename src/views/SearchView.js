@@ -40,6 +40,7 @@ export function SearchView () {
       </Section>
       <ResultList
         results={data}
+        location={location}
         isLoading={isLoading}
         locationError={currentLocationError}
         searchError={error}

@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 export function ResultList ({
+  location,
   results,
   isLoading,
   locationError,
@@ -13,7 +14,7 @@ export function ResultList ({
     ?.sort((a, b) => a.distance - b.distance)
     .map((result, index) => (
       <Col key={index} lg={6}>
-        <ResultListItem result={result} />
+        <ResultListItem result={result} location={location} />
       </Col>
     ))
 

@@ -25,3 +25,10 @@ export async function searchPlaces (params) {
   const { data } = await api.get('/search' + queryParams)
   return data.results
 }
+
+export async function getPlaceDetails (id) {
+  if (id === '') return null
+
+  const { data } = await api.get(`/${id}`)
+  return data
+}
