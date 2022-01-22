@@ -22,7 +22,6 @@ export function SearchView () {
 
   const isSearchInputDisabled = !location.type
 
-  console.log(searchResults)
   return (
     <>
       <Section>

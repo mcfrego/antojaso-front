@@ -1,7 +1,9 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
-import { Dropdown } from 'react-bootstrap'
-import DropdownToggle from 'react-bootstrap/esm/DropdownToggle'
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownToggle from 'react-bootstrap/DropdownToggle'
+import InputGroup from 'react-bootstrap/InputGroup'
+import Button from 'react-bootstrap/Button'
 
 /* eslint-disable react/display-name */
 const CustomFormControl = React.forwardRef(
@@ -12,23 +14,27 @@ const CustomFormControl = React.forwardRef(
       'arial-labelledby': arial,
       onClick,
       onChange,
+      onClear,
       value
     },
     ref
   ) => (
-    <Form.Control
-      ref={ref}
-      value={value}
-      placeholder={placeholder}
-      arial-labelledby={arial}
-      disabled={disabled}
-      onClick={e => {
-        e.preventDefault()
-        onClick(e)
-      }}
-      onChange={onChange}
-      onSelect={e => e.stopPropagation()}
-    />
+    <InputGroup>
+      <Form.Control
+        ref={ref}
+        value={value}
+        placeholder={placeholder}
+        arial-labelledby={arial}
+        disabled={disabled}
+        onClick={e => {
+          e.preventDefault()
+          onClick(e)
+        }}
+        onChange={onChange}
+        onSelect={e => e.stopPropagation()}
+      />
+      <Button onClick={onClear}>Clear</Button>
+    </InputGroup>
   )
 )
 
@@ -61,6 +67,15 @@ export function FormLocation ({
     })
   }
 
+  const clearPositionHandler = () => {
+    if (location.type !== 'current') {
+      onChangeLocation({
+        actionCheckbox: true,
+        stateCheckbox: false
+      })
+    }
+  }
+
   const inputValue = location.selectedName
   const checkboxLabel = `Get current location ${
     !location.currentValue ? '(not available)' : ''
@@ -78,6 +93,7 @@ export function FormLocation ({
           aria-labelledby='e.g. Las Palmas'
           disabled={isInputDisabled}
           onChange={typingPositionHandler}
+          onClear={clearPositionHandler}
           value={inputValue}
           as={CustomFormControl}
         ></DropdownToggle>
