@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import { useCurrentLocation } from '../hooks'
 
 export const LocationContext = React.createContext({

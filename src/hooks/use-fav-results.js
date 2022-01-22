@@ -14,7 +14,8 @@ export function useFavResults ({ key, initialValue }) {
   const setValue = newValue => {
     setStoredValue(prevState => {
       const valueToStore = [...prevState, newValue]
-      window.localStorage.setItem(key, JSON.stringify(storedValue))
+      console.log(valueToStore)
+      window.localStorage.setItem(key, JSON.stringify(valueToStore))
       return valueToStore
     })
   }
@@ -22,7 +23,7 @@ export function useFavResults ({ key, initialValue }) {
   const deleteValue = valueToDelete => {
     setStoredValue(() => {
       const valueToStore = storedValue.filter(value => value !== valueToDelete)
-      window.localStorage.setItem(key, valueToStore)
+      window.localStorage.setItem(key, JSON.stringify(valueToStore))
       return valueToStore
     })
   }

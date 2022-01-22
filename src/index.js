@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { LocationProvider } from './context/location-context'
+import { FavoritePlacesProvider } from './context/favorites-places-context'
 
 import App from './App'
 
@@ -14,9 +15,11 @@ ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <LocationProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <FavoritePlacesProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </FavoritePlacesProvider>
       </LocationProvider>
     </QueryClientProvider>
   </React.StrictMode>,
