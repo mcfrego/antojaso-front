@@ -8,8 +8,8 @@ export function SearchView () {
   const { location, onChangeLocation } = useContext(LocationContext)
   const { data, isLoading, error } = useSearchResults(search, location)
 
-  console.log('searchview')
   const isSearchInputDisabled = !location.type
+
   return (
     <>
       <Section>
