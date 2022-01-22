@@ -2,6 +2,7 @@ import Form from 'react-bootstrap/Form'
 
 export function FormSearch ({ search, onChangeSearch, isInputDisabled }) {
   const selectedSearchHandler = event => {
+    event.preventDefault()
     onChangeSearch(event.target.value)
   }
 

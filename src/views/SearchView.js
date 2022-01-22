@@ -1,15 +1,28 @@
 import { useState, useContext } from 'react'
 import { LocationContext } from '../context/location-context'
-import { useSearchResults } from '../hooks'
+import { useSearchResults, useTypingLocation } from '../hooks'
 import { Section, FormLocation, FormSearch, ResultList } from '../components'
 
 export function SearchView () {
-  const [search, setSearch] = useState('')
   const { location, onChangeLocation } = useContext(LocationContext)
-  const { data, isLoading, error } = useSearchResults(search, location)
+  const { data: typingLocationResults } = useTypingLocation({
+    searchTerm: location.selectedName,
+    locationTerm: location.currentValue
+  })
+
+  const [search, setSearch] = useState('')
+  const {
+    data: searchResults,
+    isLoading: isLoadingSearchResults,
+    error: errorSearchResults
+  } = useSearchResults({
+    searchTerm: search,
+    locationTerm: location.selectedValue
+  })
 
   const isSearchInputDisabled = !location.type
 
+  console.log(searchResults)
   return (
     <>
       <Section>
@@ -24,8 +37,8 @@ export function SearchView () {
       <Section>
         <FormLocation
           location={location}
-          currentLocation={location.current}
           onChangeLocation={onChangeLocation}
+          typingLocationResults={typingLocationResults}
         />
         <FormSearch
           search={search}
@@ -34,11 +47,10 @@ export function SearchView () {
         />
       </Section>
       <ResultList
-        results={data}
         location={location}
-        isLoading={isLoading}
-        locationError={location.currentError}
-        searchError={error}
+        results={searchResults}
+        isLoading={isLoadingSearchResults}
+        searchError={errorSearchResults}
       />
     </>
   )

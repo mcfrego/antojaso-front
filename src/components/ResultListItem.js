@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom'
 
 import Card from 'react-bootstrap/Card'
 
-export function ResultListItem ({ result, location: locationSearch }) {
+export function ResultListItem ({ result }) {
   const history = useHistory()
 
   const {

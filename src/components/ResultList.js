@@ -3,30 +3,24 @@ import { Section, ResultListItem } from '.'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export function ResultList ({
-  location,
-  results,
-  isLoading,
-  locationError,
-  searchError
-}) {
+export function ResultList ({ location, results, isLoading, searchError }) {
   const filteredResults = results
     ?.sort((a, b) => a.distance - b.distance)
     .map((result, index) => (
       <Col key={index} lg={6}>
-        <ResultListItem result={result} location={location} />
+        <ResultListItem result={result} />
       </Col>
     ))
 
   return (
     <Section>
-      {locationError && !results && !isLoading && (
+      {location.currentError && !results && !isLoading && (
         <>
           <p>Image PLACEHOLDER</p>
           <p>Geoposition not available. Try typing a location</p>
         </>
       )}
-      {!locationError && !results && !isLoading && (
+      {!location.currentError && !results && !isLoading && (
         <>
           <p>Welcome image PLACEHOLDER</p>
           <p>Set your position and try some search</p>

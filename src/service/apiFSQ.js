@@ -10,22 +10,32 @@ const api = axios.create({
   }
 })
 
-const formatQueryLocationParams = (type, value) =>
-  type === 'near'
-    ? `&near=${value.replace(' ', '%20')}`
-    : `&ll=${value.latitude},${value.longitude}&radius=100000`
-
 export async function searchPlaces (params) {
-  const { searchTerm, type, value } = params
+  const { searchTerm, locationTerm } = params
+
+  if (searchTerm === '' || !locationTerm) return null
+
+  const querySearch = 'query=' + searchTerm
+  const queryLocation = `ll=${locationTerm}&radius=100000`
+  const queryFields = 'fields=fsq_id,rating,categories,name,distance,location'
+
+  const { data } = await api.get(
+    `places/search?${querySearch}&${queryLocation}&${queryFields}`
+  )
+  return data.results
+}
+
+export async function getAutocompletePlaces (params) {
+  const { searchTerm, locationTerm } = params
 
   if (searchTerm === '') return null
 
   const querySearch = 'query=' + searchTerm
-  const queryLocation = formatQueryLocationParams(type, value)
-  const queryFields = 'fields=fsq_id,rating,categories,name,distance,location'
+  const queryLocation = `ll=${locationTerm || '52.52437,13.41053'}`
+  const queryType = 'types=geo'
 
   const { data } = await api.get(
-    `/search?${querySearch}&${queryLocation}&${queryFields}`
+    `/autocomplete?${querySearch}&${queryLocation}&${queryType}`
   )
   return data.results
 }
@@ -37,6 +47,6 @@ export async function getPlaceDetails (params) {
   const queryFields =
     'fields=fsq_id,rating,categories,name,distance,location,description,tel,website,social_media,price,menu,geocodes'
 
-  const { data } = await api.get(`/${placeId}?${queryFields}`)
+  const { data } = await api.get(`/places/${placeId}?${queryFields}`)
   return data
 }

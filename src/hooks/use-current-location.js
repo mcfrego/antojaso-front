@@ -3,8 +3,9 @@ import { useEffect } from 'react'
 export function useCurrentLocation (setLocation) {
   const handleSuccess = position => {
     const { latitude, longitude } = position.coords
+
     setLocation(prevState => {
-      return { ...prevState, current: { latitude, longitude } }
+      return { ...prevState, currentValue: `${latitude},${longitude}` }
     })
   }
 
