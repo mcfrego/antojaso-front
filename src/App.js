@@ -1,6 +1,6 @@
 import { Route, Switch, Redirect } from 'react-router-dom'
 
-import { SearchView, DetailView } from './views'
+import { SearchView, DetailView, FavoritesView } from './views'
 import { Layout } from './components'
 
 export default function App () {
@@ -12,6 +12,9 @@ export default function App () {
         </Route>
         <Route path='/search'>
           <SearchView />
+        </Route>
+        <Route path='/favorites'>
+          <FavoritesView />
         </Route>
         <Route path='/place/:placeId'>
           <DetailView />

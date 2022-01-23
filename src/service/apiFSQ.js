@@ -41,12 +41,27 @@ export async function getAutocompletePlaces (params) {
 }
 
 export async function getPlaceDetails (params) {
-  const { placeId, type, value } = params
+  const { placeId } = params
 
-  // const queryLocation = formatQueryLocationParams(type, value)
   const queryFields =
     'fields=fsq_id,rating,categories,name,distance,location,description,tel,website,social_media,price,menu,geocodes'
 
   const { data } = await api.get(`/places/${placeId}?${queryFields}`)
   return data
+}
+
+export async function getPlacesDetails (params) {
+  const { favorites } = params
+
+  const queryFields = 'fields=fsq_id,rating,categories,name,distance,location'
+
+  const results = []
+
+  for (let i = 0; i < favorites.length; i++) {
+    const placeId = favorites[i]
+    const { data } = await api.get(`/places/${placeId}?${queryFields}`)
+    results.push(data)
+  }
+
+  return results
 }

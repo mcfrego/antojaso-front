@@ -14,7 +14,6 @@ export function useFavResults ({ key, initialValue }) {
   const setValue = newValue => {
     setStoredValue(prevState => {
       const valueToStore = [...prevState, newValue]
-      console.log(valueToStore)
       window.localStorage.setItem(key, JSON.stringify(valueToStore))
       return valueToStore
     })

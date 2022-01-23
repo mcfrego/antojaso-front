@@ -19,7 +19,9 @@ export function ResultListItem ({ result }) {
   const category = categories[0].name
   const icon = categories[0].icon.prefix + 'bg_32' + categories[0].icon.suffix
   const address = location.address
-  const distance = `(${(distanceNoFormat / 1000).toFixed(1)} km)`
+  const distance = distanceNoFormat
+    ? `(${(distanceNoFormat / 1000).toFixed(1)} km)`
+    : ''
   const isFav = !!favorites.find(fav => fav === id)
   const onCardClick = () => {
     history.push(`/place/${id}`)
