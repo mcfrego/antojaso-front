@@ -3,7 +3,7 @@ import { useDetailFavResults } from '../hooks'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export function FavoritesView () {
+export default function FavoritesView () {
   const { data, isLoading } = useDetailFavResults()
 
   return (

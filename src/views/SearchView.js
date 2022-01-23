@@ -3,7 +3,7 @@ import { LocationContext } from '../context/location-context'
 import { useSearchResults, useTypingLocation } from '../hooks'
 import { Section, FormLocation, FormSearch, ResultList } from '../components'
 
-export function SearchView () {
+export default function SearchView () {
   const { location, onChangeLocation } = useContext(LocationContext)
   const { data: typingLocationResults } = useTypingLocation({
     searchTerm: location.selectedName,

@@ -15,7 +15,7 @@ const formatMapUrl = ({ latitude, longitude }) => {
   return `${urlBase}?${urlKey}&${urlSize}&${urlZoom}&${urlMarker}`
 }
 
-export function DetailView () {
+export default function DetailView () {
   const { placeId } = useParams()
   const { data } = useDetailResults({ placeId })
   console.log(data)
