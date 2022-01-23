@@ -17,7 +17,8 @@ export async function searchPlaces (params) {
 
   const querySearch = 'query=' + searchTerm
   const queryLocation = `ll=${locationTerm}&radius=100000`
-  const queryFields = 'fields=fsq_id,rating,categories,name,distance,location'
+  const queryFields =
+    'fields=fsq_id,rating,categories,name,distance,location,geocodes'
 
   const { data } = await api.get(
     `places/search?${querySearch}&${queryLocation}&${queryFields}`

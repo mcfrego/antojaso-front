@@ -32,7 +32,6 @@ export function DetailView () {
   const phone = data?.tel
   const social = data?.social_media
 
-  console.log(social)
   return (
     <Section>
       <Image src={mapUrl} fluid rounded className='mb-4' />
