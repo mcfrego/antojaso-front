@@ -4,6 +4,7 @@ import { useSearchResults, useTypingLocation } from '../hooks'
 import { Section, FormLocation, FormSearch, ResultList } from '../components'
 
 export default function SearchView () {
+  // Better to call location context here, instead each child component.
   const { location, onChangeLocation } = useContext(LocationContext)
   const { data: typingLocationResults } = useTypingLocation({
     searchTerm: location.selectedName,
