@@ -19,5 +19,13 @@
   "rules": {
     "react/prop-types": "off",
     "no-unused-vars": "warn"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.js", "**/*.test.jsx"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }
