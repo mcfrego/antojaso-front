@@ -1,6 +1,9 @@
 import { useParams } from 'react-router-dom'
 import { Section, MapImage } from '../components'
 import { useDetailResults } from '../hooks'
+import Card from 'react-bootstrap/Card'
+import Stack from 'react-bootstrap/Stack'
+import Image from 'react-bootstrap/Image'
 
 export default function DetailView () {
   const { placeId } = useParams()
@@ -16,20 +19,40 @@ export default function DetailView () {
   const category = data?.categories[0].name
   const icon =
     data?.categories[0].icon.prefix + 'bg_32' + data?.categories[0].icon.suffix
-  const address = `${data?.location.address} (${data?.location.locality})`
+  const address = data?.location.address
+  const locality = data?.location.locality
+  const rating = data?.rating
   const price = data?.price
   const phone = data?.tel
-  const social = data?.social_media
+  const website = data?.website
 
   return (
     <Section>
       <MapImage coordinates={coordinates} zoom />
-      <h2>{name}</h2>
-      <p>{category}</p>
-      <img src={icon} />
-      <p>{address}</p>
-      <p>{price}</p>
-      <p>{phone}</p>
+      <Card className='mt-4 text-center'>
+        <Card.Header>
+          <h2>{name}</h2>
+        </Card.Header>
+      </Card>
+      <Card.Body>
+        <Stack direction='horizontal' className='mb-4'>
+          <Image className='me-2' src={icon} fluid roundedCircle />
+          <Card.Subtitle>{category}</Card.Subtitle>
+        </Stack>
+        <Card.Text>Address: {address}</Card.Text>
+        <Card.Text>Locality: {locality}</Card.Text>
+        <Card.Text>Price (out of 4): {price}</Card.Text>
+
+        <Card.Text>
+          Phone: <a href={`tel:${phone.replace(' ', '')}`}>{phone}</a>
+        </Card.Text>
+        <Card.Text>
+          Website:{' '}
+          <a href={website} target='_blank' rel='noreferrer'>
+            {website}
+          </a>
+        </Card.Text>
+      </Card.Body>
     </Section>
   )
 }

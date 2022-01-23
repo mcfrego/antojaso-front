@@ -39,11 +39,11 @@ export function ResultListItem ({ result, isDistanceOrder }) {
   }
 
   return (
-    <Card className='mb-3'>
+    <Card className='mb-4'>
       <Card.Body>
         <Stack direction='horizontal'>
-          <Card.Title className='me-auto' onClick={onCardClick}>
-            {name}
+          <Card.Title className='me-auto text-primary' onClick={onCardClick}>
+            <u>{name}</u>
           </Card.Title>
           {isFav && (
             <HeartFill size={25} color='lightseagreen' onClick={onFavClick} /> // This instead of ternary op. because of eslint
