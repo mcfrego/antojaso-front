@@ -9,7 +9,7 @@ In order to start testing this web app, you must ensure to set env variables cor
 After that, just run: 
 
 - `npm i`
-- `npm run start
+- `npm run start`
 
 ## Available Scripts
 
