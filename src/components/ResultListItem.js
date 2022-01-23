@@ -9,7 +9,8 @@ export function ResultListItem ({ result }) {
     name,
     categories,
     location,
-    distance: distanceNoFormat
+    distance: distanceNoFormat,
+    rating
   } = result
   const history = useHistory()
   const { favorites, onAddFavorite, onDeleteFavorite } = useContext(
@@ -43,6 +44,7 @@ export function ResultListItem ({ result }) {
         <Card.Text>
           {address} {distance}
         </Card.Text>
+        <Card.Text>{rating}</Card.Text>
         <Card.Text onClick={onFavClick}>{isFav ? 'FAV' : 'not fav'}</Card.Text>
       </Card.Body>
     </Card>
