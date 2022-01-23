@@ -16,7 +16,7 @@ export function ResultList ({ location, results, isLoading, searchError }) {
     })
     .map((result, index) => (
       <Col key={index} lg={6}>
-        <ResultListItem result={result} />
+        <ResultListItem result={result} isDistanceOrder={isDistanceOrder} />
       </Col>
     ))
 

@@ -3,6 +3,7 @@ import Image from 'react-bootstrap/Image'
 const MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
 const formatMapUrl = (coordinates, zoom) => {
+  // These are the params Google Maps API requires form static map API
   const urlBase = 'https://maps.googleapis.com/maps/api/staticmap'
   const urlKey = `key=${MAPS_KEY}`
   const urlSize = 'size=600x300'

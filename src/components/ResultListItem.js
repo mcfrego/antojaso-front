@@ -2,28 +2,33 @@ import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { FavoritePlacesContext } from '../context/favorites-places-context'
 import Card from 'react-bootstrap/Card'
+import Image from 'react-bootstrap/Image'
+import Stack from 'react-bootstrap/Stack'
+import { Heart, HeartFill } from 'react-bootstrap-icons'
 
-export function ResultListItem ({ result }) {
+export function ResultListItem ({ result, isDistanceOrder }) {
   const {
     fsq_id: id,
     name,
     categories,
     location,
     distance: distanceNoFormat,
-    rating
+    rating = 'not available'
   } = result
   const history = useHistory()
   const { favorites, onAddFavorite, onDeleteFavorite } = useContext(
     FavoritePlacesContext
   )
 
+  // All api data formatting
   const category = categories[0].name
   const icon = categories[0].icon.prefix + 'bg_32' + categories[0].icon.suffix
   const address = location.address
   const distance = distanceNoFormat
-    ? `(${(distanceNoFormat / 1000).toFixed(1)} km)`
+    ? `Distance: ${(distanceNoFormat / 1000).toFixed(1)} km away`
     : ''
   const isFav = !!favorites.find(fav => fav === id)
+
   const onCardClick = () => {
     history.push(`/place/${id}`)
   }
@@ -36,17 +41,26 @@ export function ResultListItem ({ result }) {
   return (
     <Card className='mb-3'>
       <Card.Body>
-        <Card.Title onClick={onCardClick}>{name}</Card.Title>
-        <Card.Subtitle>
-          <img src={icon} />
+        <Stack direction='horizontal'>
+          <Card.Title className='me-auto' onClick={onCardClick}>
+            {name}
+          </Card.Title>
+          {isFav && (
+            <HeartFill size={25} color='lightseagreen' onClick={onFavClick} /> // This instead of ternary op. because of eslint
+          )}
+          {!isFav && (
+            <Heart size={25} color='lightseagreen' onClick={onFavClick} /> // This instead of ternary op. because of eslint
+          )}
+        </Stack>
+        <Card.Subtitle className='mt-1'>
+          <Image className='me-2' src={icon} fluid roundedCircle />
           {category}
         </Card.Subtitle>
-        <Card.Text>
-          {address} {distance}
-        </Card.Text>
-        <Card.Text>{rating}</Card.Text>
-        <Card.Text onClick={onFavClick}>{isFav ? 'FAV' : 'not fav'}</Card.Text>
+        <Card.Text className='mt-4'>{address}</Card.Text>
       </Card.Body>
+      <Card.Footer>
+        {isDistanceOrder ? distance : `Rating (out of 10): ${rating}`}
+      </Card.Footer>
     </Card>
   )
 }

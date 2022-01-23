@@ -6,6 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
 
 /* eslint-disable react/display-name */
+// React Bootstrap way to change default structure: from toogleButtom to CustomFormControl
 const CustomFormControl = React.forwardRef(
   (
     {
@@ -31,7 +32,7 @@ const CustomFormControl = React.forwardRef(
           onClick(e)
         }}
         onChange={onChange}
-        onSelect={e => e.stopPropagation()}
+        onSelect={e => e.stopPropagation()} // Form stays open
       />
       <Button onClick={onClear}>Clear</Button>
     </InputGroup>
@@ -44,6 +45,7 @@ export function FormLocation ({
   typingLocationResults
 }) {
   const currentPositionHandler = eventCheckbox => {
+    // These are the states in Location Context
     onChangeLocation({
       actionCheckbox: true,
       stateCheckbox: eventCheckbox.target.checked
@@ -51,6 +53,7 @@ export function FormLocation ({
   }
 
   const typingPositionHandler = eventInput => {
+    // These are the states in Location Context
     onChangeLocation({
       actionCheckbox: false,
       name: eventInput.target.value,
@@ -59,6 +62,7 @@ export function FormLocation ({
   }
 
   const selectedPositionHandler = selection => {
+    // These are the states in Location Context
     const { name, center } = selection.geo
     onChangeLocation({
       actionCheckbox: false,
@@ -68,6 +72,7 @@ export function FormLocation ({
   }
 
   const clearPositionHandler = () => {
+    // These are the states in Location Context
     if (location.type !== 'current') {
       onChangeLocation({
         actionCheckbox: true,
@@ -95,7 +100,7 @@ export function FormLocation ({
           onChange={typingPositionHandler}
           onClear={clearPositionHandler}
           value={inputValue}
-          as={CustomFormControl}
+          as={CustomFormControl} // Here we change default toggleButton for above CustomFormControl
         ></DropdownToggle>
 
         {typingLocationResults?.length > 0 && (
