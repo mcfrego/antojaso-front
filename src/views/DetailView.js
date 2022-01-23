@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { Section, MapImage } from '../components'
+import { Section, MapImage, Feedback } from '../components'
 import { useDetailResults } from '../hooks'
 import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
@@ -10,7 +10,7 @@ export default function DetailView () {
   const { data } = useDetailResults({ placeId })
   console.log(data)
 
-  if (!data) return <p>Loading ...</p>
+  if (!data) return <Feedback type='loading' />
 
   const coordinates = [
     `${data?.geocodes.main.latitude},${data?.geocodes.main.longitude}`

@@ -10,7 +10,13 @@ const FavoritesView = React.lazy(() => import('./views/FavoritesView'))
 export default function App () {
   return (
     <Layout>
-      <Suspense fallback={<Spinner animation='grow' variant='primary' />}>
+      <Suspense
+        fallback={
+          <div className='text-center mt-5'>
+            <Spinner animation='grow' variant='primary' />
+          </div>
+        }
+      >
         <Switch>
           <Route path='/' exact>
             <Redirect to='/search' />
