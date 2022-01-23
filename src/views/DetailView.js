@@ -1,19 +1,6 @@
 import { useParams } from 'react-router-dom'
-import { Section } from '../components'
+import { Section, MapImage } from '../components'
 import { useDetailResults } from '../hooks'
-import Image from 'react-bootstrap/Image'
-
-const MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-
-const formatMapUrl = ({ latitude, longitude }) => {
-  const urlBase = 'https://maps.googleapis.com/maps/api/staticmap'
-  const urlKey = `key=${MAPS_KEY}`
-  const urlSize = 'size=600x300'
-  const urlZoom = 'zoom=16'
-  const urlMarker = `markers=color:red%7C${latitude},${longitude}`
-
-  return `${urlBase}?${urlKey}&${urlSize}&${urlZoom}&${urlMarker}`
-}
 
 export default function DetailView () {
   const { placeId } = useParams()
@@ -22,7 +9,9 @@ export default function DetailView () {
 
   if (!data) return <p>Loading ...</p>
 
-  const mapUrl = data && formatMapUrl(data?.geocodes.main)
+  const coordinates = [
+    `${data?.geocodes.main.latitude},${data?.geocodes.main.longitude}`
+  ]
   const name = data?.name
   const category = data?.categories[0].name
   const icon =
@@ -34,7 +23,7 @@ export default function DetailView () {
 
   return (
     <Section>
-      <Image src={mapUrl} fluid rounded className='mb-4' />
+      <MapImage coordinates={coordinates} zoom />
       <h2>{name}</h2>
       <p>{category}</p>
       <img src={icon} />

@@ -1,25 +1,9 @@
 import { useState } from 'react'
-import { Section, ResultListItem } from '.'
+import { Section, ResultListItem, Feedback, Modal, MapImage } from '.'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
-import Image from 'react-bootstrap/Image'
-
-const MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-
-const formatMapUrl = locationResults => {
-  const urlBase = 'https://maps.googleapis.com/maps/api/staticmap'
-  const urlKey = `key=${MAPS_KEY}`
-  const urlSize = 'size=600x300'
-  const urlMarkerStyle = 'markers=color:red'
-  const urlMarkerValues = locationResults
-    ?.map(result => '%7C' + result)
-    .join('')
-
-  return `${urlBase}?${urlKey}&${urlSize}&${urlMarkerStyle}${urlMarkerValues}`
-}
 
 export function ResultList ({ location, results, isLoading, searchError }) {
   const [isDistanceOrder, setIsDistanceOrder] = useState(true)
@@ -28,7 +12,7 @@ export function ResultList ({ location, results, isLoading, searchError }) {
   const filteredResults = results
     ?.sort((a, b) => {
       if (isDistanceOrder) return a.distance - b.distance
-      return b.rating - a.rating
+      return (b.rating || 0) - (a.rating || 0) // In case no rating data
     })
     .map((result, index) => (
       <Col key={index} lg={6}>
@@ -61,18 +45,15 @@ export function ResultList ({ location, results, isLoading, searchError }) {
       {results?.length > 0 && (
         <>
           <Modal
+            title='Your map results'
             show={isModalShow}
             onHide={() => setIsModalShow(false)}
-            centered
           >
-            <Modal.Header closeButton />
-            <Modal.Body>
-              <Image src={formatMapUrl(locationResults)} fluid rounded />
-            </Modal.Body>
+            <MapImage coordinates={locationResults} />
           </Modal>
           <Row>
             <h2>Search results</h2>
-            <Stack direction='horizontal' className='mb-4'>
+            <Stack direction='horizontal' className='mt-2 mb-4'>
               Sort by:
               <Button
                 variant={isDistanceButtonActive}
@@ -102,29 +83,13 @@ export function ResultList ({ location, results, isLoading, searchError }) {
         </>
       )}
       {location.currentError && !results && !isLoading && (
-        <>
-          <p>Image PLACEHOLDER</p>
-          <p>Geoposition not available. Try typing a location</p>
-        </>
+        <Feedback type='noLocation' />
       )}
       {!location.currentError && !results && !isLoading && (
-        <>
-          <p>Welcome image PLACEHOLDER</p>
-          <p>Set your position and try some search</p>
-        </>
+        <Feedback type='welcome' />
       )}
-      {isLoading && (
-        <>
-          <p>loading image PLACEHOLDER</p>
-          <p>Loading ...</p>
-        </>
-      )}
-      {results?.length === 0 && (
-        <>
-          <p>No results PLACEHOLDER</p>
-          <p>No results! Try other search ...</p>
-        </>
-      )}
+      {isLoading && <Feedback type='loading' />}
+      {results?.length === 0 && <Feedback type='noResults' />}
     </Section>
   )
 }

@@ -1,3 +1,3 @@
 export function Section ({ children }) {
-  return <section className='mt-4'>{children}</section>
+  return <section className='mt-5'>{children}</section>
 }

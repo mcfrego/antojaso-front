@@ -1,8 +1,7 @@
-import { ResultListItem } from '../components'
+import { ResultListItem, Feedback } from '../components'
 import { useDetailFavResults } from '../hooks'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { EmojiDizzyFill } from 'react-bootstrap-icons'
 
 export default function FavoritesView () {
   const { data, isLoading } = useDetailFavResults()
@@ -20,14 +19,7 @@ export default function FavoritesView () {
       <h2 className='mt-4'>These are your favorites places</h2>
       {isLoading && <p>Loading ...</p>}
       {!isLoading && data && resultList}
-      {!isLoading && !data?.length && (
-        <div className='block-center text-center mt-4'>
-          <EmojiDizzyFill size={96} color='lightgrey' />
-          <p className='mt-4'>
-            Ops! It seems you do not have any favorite yet.
-          </p>
-        </div>
-      )}
+      {!isLoading && !data?.length && <Feedback type='noFavs' />}
     </Row>
   )
 }
