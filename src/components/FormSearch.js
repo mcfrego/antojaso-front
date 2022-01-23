@@ -14,11 +14,11 @@ export function FormSearch ({ search, onChangeSearch, isInputDisabled }) {
   return (
     <Form className='mb-4'>
       <Form.Group controlId='search'>
-        <Form.Label>Search</Form.Label>
+        <Form.Label>What do you want to eat?</Form.Label>
         <InputGroup>
           <Form.Control
-            placeholder='e.g. Hamburguer'
-            aria-labelledby='e.g. Hamburguer'
+            placeholder='e.g. Pizza'
+            aria-labelledby='e.g. Pizza'
             value={search}
             disabled={isInputDisabled}
             onChange={selectedSearchHandler}

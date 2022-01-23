@@ -90,7 +90,7 @@ export function FormLocation ({
 
   return (
     <Form className='mb-4'>
-      <Form.Label>Location</Form.Label>
+      <Form.Label>Where are you?</Form.Label>
       <Dropdown>
         <DropdownToggle
           className='mb-2'

@@ -18,9 +18,11 @@ export function Layout ({ children }) {
     <Container className='my-4'>
       <header>
         <Stack direction='horizontal' gap='2'>
-          <h1 onClick={onHomeClick} className='me-auto'>
-            El Antojaso
-          </h1>
+          <h1 className='me-auto'>El Antojaso</h1>
+          <p onClick={onHomeClick} className='h4 text-primary font-weight-bold'>
+            <u>Home</u>
+          </p>
+          <span className='vr ms-2' />
           <BookmarkHeartFill
             onClick={onFavClick}
             size={40}
