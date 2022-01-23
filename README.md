@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Installation
+
+In order to start testing this web app, you must ensure to set env variables correctly. To do so, create a file using the already-existing `.env.example` as a scaffold and call it `.env`. After that, use your own FOUSQUARE Places API and GOOGLE MAPS API keys.
+
+After that, just run: 
+
+- `npm i`
+- `npm run start`
+
 ## Available Scripts
 
 In the project directory, you can run:
