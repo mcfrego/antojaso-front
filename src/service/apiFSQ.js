@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const API_KEY = process.env.REACT_APP_API_KEY
 const BASE_URL = process.env.REACT_APP_API_URL_3
+const QUERY_LOCATION_DEFAULT = '52.52437,13.41053' // Coordinates to Berlin
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -32,7 +33,7 @@ export async function getAutocompletePlaces (params) {
   if (searchTerm === '') return null
 
   const querySearch = 'query=' + searchTerm
-  const queryLocation = `ll=${locationTerm || '52.52437,13.41053'}`
+  const queryLocation = `ll=${locationTerm || QUERY_LOCATION_DEFAULT}`
   const queryType = 'types=geo'
 
   const { data } = await api.get(
@@ -58,6 +59,7 @@ export async function getPlacesDetails (params) {
 
   const results = []
 
+  // Async for loop
   for (let i = 0; i < favorites.length; i++) {
     const placeId = favorites[i]
     const { data } = await api.get(`/places/${placeId}?${queryFields}`)

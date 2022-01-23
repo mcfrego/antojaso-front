@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { Section } from '../components'
-import { useDetailResults } from '../hooks/use-detail-results'
+import { useDetailResults } from '../hooks'
 import Image from 'react-bootstrap/Image'
 
 const MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY

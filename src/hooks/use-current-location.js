@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 
+// Won't return anything to avoid infinite loop in Context
 export function useCurrentLocation (setLocation) {
   const handleSuccess = position => {
     const { latitude, longitude } = position.coords
 
     setLocation(prevState => {
+      // The currentValue format is the same through all the app
       return { ...prevState, currentValue: `${latitude},${longitude}` }
     })
   }
@@ -18,6 +20,7 @@ export function useCurrentLocation (setLocation) {
   useEffect(() => {
     const { geolocation } = navigator
 
+    // No browser available
     if (!geolocation) {
       setLocation(prevState => {
         return { ...prevState, currentError: 'Geolocation is not supported' }
