@@ -46,7 +46,7 @@ export async function getPlaceDetails (params) {
   const { placeId } = params
 
   const queryFields =
-    'fields=fsq_id,rating,categories,name,distance,location,description,tel,website,social_media,price,menu,geocodes'
+    'fields=fsq_id,rating,categories,name,distance,location,description,tel,website,social_media,price,menu,geocodes,hours'
 
   const { data } = await api.get(`/places/${placeId}?${queryFields}`)
   return data

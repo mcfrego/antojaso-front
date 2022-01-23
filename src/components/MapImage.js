@@ -19,5 +19,9 @@ export function MapImage (props) {
 
   const imageSrc = formatMapUrl(coordinates, zoom)
 
-  return <Image src={imageSrc} fluid rounded />
+  return (
+    <div className='text-center'>
+      <Image src={imageSrc} fluid rounded />
+    </div>
+  )
 }

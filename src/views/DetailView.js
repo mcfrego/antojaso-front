@@ -25,6 +25,8 @@ export default function DetailView () {
   const price = data?.price
   const phone = data?.tel
   const website = data?.website
+  const hours = data?.hours.display
+  const isOpen = data?.hours.open_now
 
   return (
     <Section>
@@ -39,6 +41,9 @@ export default function DetailView () {
           <Image className='me-2' src={icon} fluid roundedCircle />
           <Card.Subtitle>{category}</Card.Subtitle>
         </Stack>
+        <Card.Text>
+          Is it open?: <b>{isOpen ? 'YES' : 'NO'}</b>
+        </Card.Text>
         <Card.Text>Address: {address}</Card.Text>
         <Card.Text>Locality: {locality}</Card.Text>
         <Card.Text>Price (out of 4): {price}</Card.Text>
@@ -52,6 +57,7 @@ export default function DetailView () {
             {website}
           </a>
         </Card.Text>
+        <Card.Text>Open hours: {hours}</Card.Text>
       </Card.Body>
     </Section>
   )
