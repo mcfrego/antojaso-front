@@ -13,7 +13,7 @@ export function Feedback ({ type }) {
       return smileUpside
     case 'welcome':
       return wink
-    case 'loadins':
+    case 'loading':
       return hourglass
     case 'noResults':
       return neutral

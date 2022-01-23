@@ -17,7 +17,7 @@ export default function FavoritesView () {
     // Use Row and Col to get responsive result styling
     <Row>
       <h2 className='mt-4'>These are your favorites places</h2>
-      {isLoading && <p>Loading ...</p>}
+      {isLoading && <Feedback type='loading' />}
       {!isLoading && data && resultList}
       {!isLoading && !data?.length && <Feedback type='noFavs' />}
     </Row>

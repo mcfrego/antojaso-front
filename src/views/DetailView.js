@@ -42,7 +42,7 @@ export default function DetailView () {
         <Card.Text>Address: {address}</Card.Text>
         <Card.Text>Locality: {locality}</Card.Text>
         <Card.Text>Price (out of 4): {price}</Card.Text>
-
+        <Card.Text>Rating (out of 10): {rating}</Card.Text>
         <Card.Text>
           Phone: <a href={`tel:${phone.replace(' ', '')}`}>{phone}</a>
         </Card.Text>
