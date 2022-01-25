@@ -21,8 +21,8 @@ export function ResultListItem ({ result, isDistanceOrder }) {
   )
 
   // All api data formatting
-  const category = categories[0].name
-  const icon = categories[0].icon.prefix + 'bg_32' + categories[0].icon.suffix
+  const category = categories[0]?.name
+  const icon = categories[0]?.icon.prefix + 'bg_32' + categories[0]?.icon.suffix
   const address = location.address
   const distance = distanceNoFormat
     ? `Distance: ${(distanceNoFormat / 1000).toFixed(1)} km away`
@@ -46,10 +46,20 @@ export function ResultListItem ({ result, isDistanceOrder }) {
             <u>{name}</u>
           </Card.Title>
           {isFav && (
-            <HeartFill size={25} color='lightseagreen' onClick={onFavClick} /> // This instead of ternary op. because of eslint
+            <HeartFill
+              data-testid='fav'
+              size={25}
+              color='lightseagreen'
+              onClick={onFavClick}
+            /> // This instead of ternary op. because of eslint
           )}
           {!isFav && (
-            <Heart size={25} color='lightseagreen' onClick={onFavClick} /> // This instead of ternary op. because of eslint
+            <Heart
+              data-testid='fav'
+              size={25}
+              color='lightseagreen'
+              onClick={onFavClick}
+            /> // This instead of ternary op. because of eslint
           )}
         </Stack>
         <Card.Subtitle className='mt-1'>
